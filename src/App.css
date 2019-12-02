@@ -138,9 +138,13 @@ body{
   margin: auto;
 }
 .infomessage {
-  font-size:1.1rem;
+  font-size:17px;
   margin-bottom: 1.6rem;
   margin-top: 0;
+}
+
+.infotext{
+  font-size:12px;
 }
 
 .close{
