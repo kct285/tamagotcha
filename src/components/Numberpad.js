@@ -1,8 +1,10 @@
 import React,{Component} from 'react';
+
+
 let what = []
 for (let i=1;i<13;i++){
     if (i==10){
-        what.push("✓");
+        what.push("←")
         continue;
     }
     if (i==11){
@@ -10,7 +12,7 @@ for (let i=1;i<13;i++){
         continue;
     }
     if (i==12){
-        what.push("←")
+        what.push("✓");
         continue;
     }
   what.push(i);
@@ -50,16 +52,22 @@ class Calculator extends Component {
   {return (
               
     
-    <div className="grid"> <button className="keypadButton" value={i} onClick={this.onClick}>
+  
+    <button className="keypadButton" value={i} onClick={this.onClick}>
       {i}
       </button>
-      </div>)}, this);
+      
+      )}, this);
     
   return(
     <div>
       <input className="keypad" value={this.state.value} onSubmit={this.props.onSubmit}/>
+      <div className="grid_container"> 
       {okay}
+
+      </div>
     </div>
+
     )
   
 
