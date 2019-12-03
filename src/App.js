@@ -7,12 +7,37 @@ import './App.css';
 
 
 class App extends Component {
-  state ={
-    isOpen: false,
-    numOpen: false
+  constructor(props){
+    super(props);
+    this.state ={
+      isOpen: false,
+      numOpen: false,
+      type:"+",
+      curr:'',
+      value:0
+    }
+    this.AddSub = this.AddSub.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
-
   
+  AddSub(thing){
+    
+    let what = parseInt(thing);
+    if (this.state.type==="+"){  
+      this.setState((state)=>({
+        value:state.value + what
+      }))  
+    }
+    else{
+      this.setState((state)=>({
+        value:state.value - what
+      }))
+    }
+  }
+  onSubmit(thing){
+    this.AddSub(thing);
+    this.setState({numOpen:false});
+  }
   
   render(){
 
@@ -37,6 +62,7 @@ class App extends Component {
       }
     };
 
+  
   return (
     <div className="App">
 
@@ -64,7 +90,7 @@ class App extends Component {
       {/* TAMAGOTCHI STATUS */}
       <img id="heartbar" src= {process.env.PUBLIC_URL + '/3hearts.png'} /> 
 
-      <div id="money"> [number] </div>
+      <div id="money"> {this.state.value} </div>
 
       <img id="baby" src={process.env.PUBLIC_URL + '/baby.gif'} />
 
@@ -73,19 +99,23 @@ class App extends Component {
 
       {/* NUMBER INPUT SECTION */}
 
+      <div className="button_flex">
+      <div className="button" onClick={(e) => this.setState ({numOpen:true, type:"-" })} >
+        <a href="#"> - </a>
+      </div>
+      <div className="button" onClick={(e) => this.setState ({numOpen:true , type:"+"})} >
+        <a href="#"> + </a>
+      </div>
 
-      <Numberpad numOpen = {this.state.numOpen}>
+      <br></br>
+
+
+      <Numberpad numOpen = {this.state.numOpen} onSubmit={this.onSubmit}>
         <div className="infomodal">
            <div className="info_modalcontent">
            <span className="close" onClick={(e) => this.setState ({numOpen:false })}> &times;</span>
 
-           <NumPad.Number
-            onChange={(value) => { console.log('value', value)}}
-            placeholder={'Input'}
-            value={''}
-            decimal={2}
-            theme={myTheme}
-              />
+            
     
            </div>
         </div>
@@ -93,13 +123,7 @@ class App extends Component {
       </Numberpad>
 
 
-      <div className="button_flex">
-      <div className="button" onClick={(e) => this.setState ({numOpen:true })} >
-        <a href="#"> + </a>
-      </div>
-      <div className="button" onClick={(e) => this.setState ({numOpen:true })} >
-        <a href="#"> - </a>
-      </div>
+      
 
       </div>
       
