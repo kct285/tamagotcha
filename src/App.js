@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import Info from './components/Info';
 import Numberpad from './components/Numberpad';
-
+import Tamagotchi from './components/Tamagotchi';
 import './App.css';
-
 
 
 
@@ -20,10 +19,8 @@ class App extends Component {
     this.AddSub = this.AddSub.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.num = 
-    <Numberpad numOpen = {this.state.numOpen} onSubmit={this.onSubmit}>
-            <span className="close" onClick={(e) => this.setState ({numOpen:false})}> &times;</span>
+    <Numberpad numOpen = {this.state.numOpen} onSubmit={this.onSubmit}/>
 
-  </Numberpad>;
   }
   
   AddSub(thing){
@@ -50,6 +47,8 @@ class App extends Component {
   render(){
     let Numberpad = this.state.numOpen?this.num:null;
     let modal = this.state.numOpen?"info_modalcontent":null;
+    let xmarks = this.state.numOpen?"close":null;
+
 
     
   
@@ -59,7 +58,6 @@ class App extends Component {
 
       {/* INSTRUCTIONS SECTION */}
       <Info isOpen = {this.state.isOpen}>
-      {/* <div className={modal}> */}
       <div className="infomodal">
         <div className="info_modalcontent">
         <span className="close" onClick={(e) => this.setState ({isOpen:false })}> &times;</span>
@@ -81,27 +79,24 @@ class App extends Component {
 
 
       {/* TAMAGOTCHI STATUS */}
-      
 
-      <img id="heartbar" src= {process.env.PUBLIC_URL + '/3hearts.png'} /> 
+      <Tamagotchi money={this.state.value}/>
+
 
       <div id="money">
-        <p id="money_text">
-        {this.state.value}
-        </p>
+             <p id="money_text">
+             {this.state.value}
+             </p>
             
-          </div>
+              </div>
 
-      <img id="baby" src={process.env.PUBLIC_URL + '/baby.gif'} />
+
+      <img id="tamagotchiImg" src={process.env.PUBLIC_URL + '/baby.gif'} />
 
 
 
 
       {/* NUMBER INPUT SECTION */}
-
-
-      
-
       <div className="button_flex">
       <div className="button" onClick={(e) => this.setState ({numOpen:true, type:"-" })} >
         <a href="#"> - </a>
@@ -115,9 +110,11 @@ class App extends Component {
 
       <div className="infomodal">
        <div className={modal}>
+         <div className={xmarks}>
 
        {Numberpad}
 
+       </div>
        </div>
        </div>
 
