@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Info from './components/Info';
 import Numberpad from './components/Numberpad';
+import Heart from './components/Heart';
 import Tamagotchi from './components/Tamagotchi';
 import './App.css';
 
@@ -80,7 +81,7 @@ class App extends Component {
 
       {/* TAMAGOTCHI STATUS */}
 
-      <Tamagotchi money={this.state.value}/>
+      <Heart money={this.state.value}/>
 
 
       <div id="money">
@@ -90,8 +91,9 @@ class App extends Component {
             
               </div>
 
+      <Tamagotchi money={this.state.value}/>
 
-      <img id="tamagotchiImg" src={process.env.PUBLIC_URL + '/baby.gif'} />
+
 
 
 
