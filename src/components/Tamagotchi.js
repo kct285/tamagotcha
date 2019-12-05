@@ -3,10 +3,12 @@ import React, {Component} from 'react';
 const tamagotchi = [
     "/dead.gif",
     "/dying.gif",
+    "/sick.gif",
     "/baby.gif",
-    "/baby.gif",
+    "/toddler.gif",
     "/child.gif",
-    "/adult.gif"
+    "/adult.gif",
+    "rich.gif"
 ]
 
 
@@ -15,7 +17,7 @@ class Tamagotchi extends Component{
     constructor(props){
         super(props);
         this.state = {
-            img: "3"
+            img: "4"
         }
         this.handleMove = this.handleMove.bind(this);
     }
@@ -36,17 +38,23 @@ class Tamagotchi extends Component{
         else if (this.props.money < -5000) {
             img = 1;
         }
-        else if(this.props.money < 1000) {
+        else if (this.props.money < -3000) {
             img = 2;
         }
-        else if (this.props.money < 2000){
+        else if(this.props.money < 1000) {
             img = 3;
         }
-        else if (this.props.money < 4000){
+        else if (this.props.money < 2000){
             img = 4;
         }
-        else if (this.props.money < 99999 ){
+        else if (this.props.money < 4000){
             img = 5;
+        }
+        else if (this.props.money < 99999 ){
+            img = 6;
+        }
+        else if (this.props.money < 9999999 ){
+            img = 7;
         }
 
         return(

@@ -45,7 +45,7 @@ class Heart extends Component{
         else if (this.props.money < 4000){
             img = 4;
         }
-        else if (this.props.money < 99999 ){
+        else if (this.props.money < 999999999 ){
             img = 5;
         }
 
