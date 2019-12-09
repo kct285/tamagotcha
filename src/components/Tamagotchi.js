@@ -32,25 +32,25 @@ class Tamagotchi extends Component{
 
         let img = 3;
 
-        if (this.props.money < -7000){
+        if (this.props.money < -15000){
             img = 0;
         }
-        else if (this.props.money < -5000) {
+        else if (this.props.money < -10000) {
             img = 1;
         }
-        else if (this.props.money < -3000) {
+        else if (this.props.money < -5000) {
             img = 2;
         }
         else if(this.props.money < 1000) {
             img = 3;
         }
-        else if (this.props.money < 2000){
+        else if (this.props.money < 5000){
             img = 4;
         }
-        else if (this.props.money < 4000){
+        else if (this.props.money < 9000){
             img = 5;
         }
-        else if (this.props.money < 99999 ){
+        else if (this.props.money < 99999){
             img = 6;
         }
         else if (this.props.money < 9999999 ){
