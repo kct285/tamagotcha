@@ -21,11 +21,14 @@ for (let i=1;i<13;i++){
 
 
 
+
+
 class Calculator extends Component {
   constructor(props){
     super(props);
     this.state={
-      value:""
+      value:"",
+      data:'',
     }
     this.onClick = this.onClick.bind(this);
   }
@@ -41,14 +44,19 @@ class Calculator extends Component {
     else{this.setState({value:this.state.value+e.target.value})};
   }
 
+  // setData = (event) => {
+  //   this.setState({
+  //     data: event.target.value
+  //   })
+  // }
+  submitData = () => {
+    this.props.pushToDB("data", {text: this.state.data});
+  }
+
   render(){
 
-    
-    
   const okay = what.map(function(i)
 
-
-  
   {return (
               
     
@@ -69,6 +77,9 @@ class Calculator extends Component {
     </div>
 
     )
+
+    // who needs a package when filip could code a keypad in 10 minutes :o 
+    // thank u filip!!
   
 
     }

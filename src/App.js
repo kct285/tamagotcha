@@ -4,8 +4,11 @@ import Numberpad from './components/Numberpad';
 import Heart from './components/Heart';
 import Tamagotchi from './components/Tamagotchi';
 import './App.css';
+import {firebase_config} from './firebase_config';
+import * as firebase from 'firebase';
 
-
+firebase.initializeApp(firebase_config);
+const database = firebase.database();
 
 class App extends Component {
   constructor(props){
@@ -20,11 +23,35 @@ class App extends Component {
     this.AddSub = this.AddSub.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.num = 
-    <Numberpad numOpen = {this.state.numOpen} onSubmit={this.onSubmit}/>
+    <Numberpad numOpen = {this.state.numOpen} onSubmit={this.onSubmit} pushToDB={this.pushToDB}/>
 
   }
+
   
-  AddSub(thing){
+
+  setOnDB(path,data){
+    database.ref(path).set(data);
+  }
+
+
+  componentDidMount(){
+    const rootRef = firebase.database().ref();
+    const valueRef = rootRef.child('value');
+    valueRef.on('value',snap => {
+      this.setState({
+        value: snap.val()
+      });
+    });
+
+    let reference = database.ref("data");
+    reference.on('child_added', data => {
+      this.setState({
+        dataArray: this.state.dataArray.concat(data.val().text)
+    })
+    }); 
+  }
+  
+  AddSub(thing, callback){
     if(!thing){
       return;
     }
@@ -32,17 +59,25 @@ class App extends Component {
     if (this.state.type==="+"){  
       this.setState((state)=>({
         value:state.value + what
-      }))  
+      }), callback)  
     }
     else{
       this.setState((state)=>({
         value:state.value - what
-      }))
+      }), callback)
     }
   }
   onSubmit(thing){
-    this.AddSub(thing);
+    this.AddSub(thing, () =>{
+      console.log("new", this.state.value);
+      // send new value to db
+      this.setOnDB("value", this.state.value)
+
+    });
     this.setState({numOpen:false});
+    
+   
+    
   }
   
   render(){
